@@ -20,3 +20,20 @@ The stats are cached in Redis, and read by the replicas when an item page is req
 As Redis isn't an ideal long-term data store, another server will 'process' the stats at regular intervals. It saves them in the main database for permanent storage and generating the graphs when required.  
 
 You could think of this node app as a 'proxy' to Redis as it has a simple function.
+
+## `PUT /emit`
+
+The main http route is `/emit` which recieves a `PUT` request from the replica servers, with a JSON payload like so:
+
+```js
+{
+    "itemHits": {
+        "5bdacb3f68cdd9516e9bf38b": 5
+    }
+}
+```
+
+`itemHits` is the object containing all items viewed in this period. The key of each element is the [ObjectID](https://docs.mongodb.com/manual/reference/method/ObjectId/) for that item and the value is the number of views.  
+All of the items in the payload will be incremented in the sorted set `popular_items`, this is then automatically synced back to the replica servers by Redis for read use when a page is viewed.  
+
+This will respond with a `200 OK` response.
