@@ -11,7 +11,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "ioredis": "^4.2.0",
-    "restify": "^7.2.2",
+    "restify": "^8.1.0",
     "rfr": "^1.2.3"
   },
   "devDependencies": {
