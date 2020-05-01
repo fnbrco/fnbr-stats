@@ -6,15 +6,19 @@
   "scripts": {
     "start": "node entry.js",
     "dev": "nodemon entry.js",
-    "test": "./node_modules/.bin/eslint ."
+    "test": "./node_modules/.bin/eslint .",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "async": "^2.6.1",
     "ioredis": "^4.2.0",
     "restify": "^8.5.1",
-    "rfr": "^1.2.3"
+    "rfr": "^1.2.3",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "eslint": "^5.8.0"
-  }
+  },
+  "snyk": true
 }
